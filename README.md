@@ -147,3 +147,422 @@ Happy coding! If you find this repository helpful, please give it a star ⭐ and
 | 23  | [How do you use `git blame` to find the author of a specific line of code?](#23-how-do-you-use-git-blame-to-find-the-author-of-a-specific-line-of-code) |
 | 24  | [What is the difference between shallow cloning and a full clone?](#24-what-is-the-difference-between-shallow-cloning-and-a-full-clone) |
 | 25  | [How do you handle a situation where a merge introduces a bug that needs to be fixed without reverting the merge?](#25-how-do-you-handle-a-situation-where-a-merge-introduces-a-bug-that-needs-to-be-fixed-without-reverting-the-merge) |
+
+# Easy Git Interview Questions and Answers
+### 1. What is Git?
+
+Git is a distributed version control system designed to handle everything from small to very large projects with speed and efficiency. It allows multiple people to collaborate on a project, track changes, and revert to previous versions if needed.
+
+#### **[⬆ Back to Top](#level--easy)**
+---
+
+### 2. How do you initialize a new Git repository?
+
+To initialize a new Git repository, navigate to your project directory and use the following command:
+
+```sh
+git init
+```
+
+This command creates a new `.git` subdirectory in your project directory, which contains all the necessary metadata for the repository.
+
+#### **[⬆ Back to Top](#level--easy)**
+---
+
+### 3. How do you clone a repository?
+
+To clone an existing repository, use the following command:
+
+```sh
+git clone <repository_url>
+```
+
+For example:
+
+```sh
+git clone https://github.com/user/repository.git
+```
+
+This command creates a new directory with the name of the repository and copies all the repository data into it.
+
+#### **[⬆ Back to Top](#level--easy)**
+---
+
+### 4. What is the command to check the status of your working directory?
+
+To check the status of your working directory, use:
+
+```sh
+git status
+```
+
+This command shows which files have been modified, which files are staged for commit, and which files are not being tracked by Git.
+
+#### **[⬆ Back to Top](#level--easy)**
+---
+
+### 5. How do you stage a file for commit?
+
+To stage a file for commit, use:
+
+```sh
+git add <file_name>
+```
+
+For example:
+
+```sh
+git add README.md
+```
+
+You can also stage all modified files at once using:
+
+```sh
+git add .
+```
+
+#### **[⬆ Back to Top](#level--easy)**
+---
+
+### 6. How do you commit changes to a repository?
+
+To commit changes, use:
+
+```sh
+git commit -m "Your commit message"
+```
+
+For example:
+
+```sh
+git commit -m "Add initial project files"
+```
+
+The `-m` flag allows you to add a commit message directly from the command line.
+
+#### **[⬆ Back to Top](#level--easy)**
+---
+
+### 7. What command do you use to view the commit history?
+
+To view the commit history, use:
+
+```sh
+git log
+```
+
+This command lists all the commits along with their messages, authors, and timestamps.
+
+#### **[⬆ Back to Top](#level--easy)**
+---
+
+### 8. How do you create a new branch?
+
+To create a new branch, use:
+
+```sh
+git branch <branch_name>
+```
+
+For example:
+
+```sh
+git branch feature-xyz
+```
+#### **[⬆ Back to Top](#level--easy)**
+---
+
+### 9. How do you switch to an existing branch?
+
+To switch to an existing branch, use:
+
+```sh
+git checkout <branch_name>
+```
+
+For example:
+
+```sh
+git checkout feature-xyz
+```
+#### **[⬆ Back to Top](#level--easy)**
+---
+
+### 10. How do you merge a branch into the current branch?
+
+To merge a branch into the current branch, use:
+
+```sh
+git merge <branch_name>
+```
+
+For example, if you are on the `main` branch and want to merge `feature-xyz`:
+
+```sh
+git merge feature-xyz
+```
+#### **[⬆ Back to Top](#level--easy)**
+---
+
+### 11. What is the difference between `git pull` and `git fetch`?
+
+- `git pull` fetches changes from a remote repository and merges them into your current branch.
+- `git fetch` only downloads changes from a remote repository but does not merge them into your current branch.
+
+Example:
+
+```sh
+git fetch origin
+git merge origin/main
+```
+
+is equivalent to:
+
+```sh
+git pull origin main
+```
+#### **[⬆ Back to Top](#level--easy)**
+---
+
+### 12. How do you delete a branch locally?
+
+To delete a branch locally, use:
+
+```sh
+git branch -d <branch_name>
+```
+
+For example:
+
+```sh
+git branch -d feature-xyz
+```
+#### **[⬆ Back to Top](#level--easy)**
+---
+
+### 13. How do you delete a branch remotely?
+
+To delete a branch remotely, use:
+
+```sh
+git push origin --delete <branch_name>
+```
+
+For example:
+
+```sh
+git push origin --delete feature-xyz
+```
+#### **[⬆ Back to Top](#level--easy)**
+---
+
+### 14. How do you undo the last commit?
+
+To undo the last commit, use:
+
+```sh
+git revert HEAD
+```
+
+Or, if you want to remove the commit and the changes:
+
+```sh
+git reset --hard HEAD~1
+```
+#### **[⬆ Back to Top](#level--easy)**
+---
+
+### 15. How do you discard changes in a file?
+
+To discard changes in a file, use:
+
+```sh
+git checkout -- <file_name>
+```
+
+For example:
+
+```sh
+git checkout -- README.md
+```
+#### **[⬆ Back to Top](#level--easy)**
+---
+
+### 16. How do you list all branches in a repository?
+
+To list all branches, use:
+
+```sh
+git branch
+```
+#### **[⬆ Back to Top](#level--easy)**
+---
+
+### 17. How do you create a new tag?
+
+To create a new tag, use:
+
+```sh
+git tag <tag_name>
+```
+
+For example:
+
+```sh
+git tag v1.0
+```
+#### **[⬆ Back to Top](#level--easy)**
+---
+
+### 18. How do you push changes to a remote repository?
+
+To push changes, use:
+
+```sh
+git push <remote> <branch>
+```
+
+For example:
+
+```sh
+git push origin main
+```
+#### **[⬆ Back to Top](#level--easy)**
+---
+
+### 19. How do you pull changes from a remote repository?
+
+To pull changes, use:
+
+```sh
+git pull <remote> <branch>
+```
+
+For example:
+
+```sh
+git pull origin main
+```
+#### **[⬆ Back to Top](#level--easy)**
+---
+
+### 20. How do you set your Git username and email?
+
+To set your Git username and email, use:
+
+```sh
+git config --global user.name "Your Name"
+git config --global user.email "your.email@example.com"
+```
+#### **[⬆ Back to Top](#level--easy)**
+---
+
+### 21. What is a commit message and why is it important?
+
+A commit message is a brief description of the changes made in a commit. It is important because it provides context and reasoning for the changes, making it easier for others (and yourself) to understand the history and purpose of changes in the project.
+
+#### **[⬆ Back to Top](#level--easy)**
+---
+
+### 22. How do you view the changes made to a file?
+
+To view changes made to a file, use:
+
+```sh
+git diff <file_name>
+```
+
+For example:
+
+```sh
+git diff README.md
+```
+#### **[⬆ Back to Top](#level--easy)**
+---
+
+### 23. How do you rename a branch?
+
+To rename a branch, use:
+
+```sh
+git branch -m <old_name> <new_name>
+```
+
+For example:
+
+```sh
+git branch -m old-branch-name new-branch-name
+```
+#### **[⬆ Back to Top](#level--easy)**
+---
+
+### 24. How do you move or rename a file?
+
+To move or rename a file, use:
+
+```sh
+git mv <old_path> <new_path>
+```
+
+For example:
+
+```sh
+git mv old_file.txt new_file.txt
+```
+#### **[⬆ Back to Top](#level--easy)**
+---
+
+### 25. What is the difference between `git reset` and `git revert`?
+
+- `git reset` moves the current branch pointer to a specified commit and can also modify the staging area and working directory.
+- `git revert` creates a new commit that undoes the changes of a specified commit, preserving the commit history.
+
+Example of `git reset`:
+
+```sh
+git reset --hard HEAD~1
+```
+
+Example of `git revert`:
+
+```sh
+git revert HEAD
+```
+#### **[⬆ Back to Top](#level--easy)**
+---
+
+### Summary Table
+
+| Command | Description |
+|---------|-------------|
+| `git init` | Initialize a new Git repository |
+| `git clone <repository_url>` | Clone an existing repository |
+| `git status` | Check the status of the working directory |
+| `git add <file_name>` | Stage a file for commit |
+| `git commit -m "message"` | Commit changes to the repository |
+| `git log` | View the commit history |
+| `git branch <branch_name>` | Create a new branch |
+| `git checkout <branch_name>` | Switch to an existing branch |
+| `git merge <branch_name>` | Merge a branch into the current branch |
+| `git pull` | Fetch and merge changes from a remote repository |
+| `git fetch` | Fetch changes from a remote repository |
+| `git branch -d <branch_name>` | Delete a branch locally |
+| `git push origin --delete <branch_name>` | Delete a branch remotely |
+| `git revert HEAD` | Undo the last commit |
+| `git checkout -- <file_name>` | Discard changes in a file |
+| `git branch` | List all branches |
+| `git tag <tag_name>` | Create a new tag |
+| `git push <remote> <branch>` | Push changes to a remote repository |
+| `git pull <remote> <branch>` | Pull changes from a remote repository |
+| `git config --global user.name "name"` | Set Git username |
+| `git config --global user.email "email"` | Set Git email |
+| `git diff <file_name>` | View changes made to a file |
+| `git branch -m <old_name> <new_name>` | Rename a branch |
+| `git mv <old_path> <new_path>` | Move or rename a file |
+| `git reset` | Move the current branch pointer |
+| `git revert` | Create a new commit that undoes changes |
+
+This comprehensive guide should provide you with a solid understanding of Git commands and their usage.
+
+#### **[⬆ Back to Top](#level--easy)**
+---
