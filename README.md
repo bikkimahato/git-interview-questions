@@ -566,3 +566,383 @@ This comprehensive guide should provide you with a solid understanding of Git co
 
 #### **[⬆ Back to Top](#level--easy)**
 ---
+
+# Medium Git Interview Questions and Answers
+### 1. What is a Git repository?
+
+A Git repository is a storage space where your project files and their history of changes are stored. It includes all the project’s files and the entire history of changes made to those files, which allows you to track versions, revert to previous states, and collaborate with others.
+
+#### **[⬆ Back to Top](#level--medium)**
+---
+
+### 2. Explain the difference between a local and remote repository.
+
+- **Local Repository**: A repository stored on your local machine. You interact with this repository using Git commands.
+- **Remote Repository**: A repository hosted on a remote server. It is often used for collaboration where multiple users push and pull changes.
+
+For example, you clone a remote repository to create a local copy on your machine.
+
+#### **[⬆ Back to Top](#level--medium)**
+---
+
+### 3. What is a commit hash?
+
+A commit hash is a unique identifier for a specific commit in the Git history. It's a 40-character SHA-1 hash that ensures each commit can be uniquely identified.
+
+Example of a commit hash:
+
+```
+e1a1d3e8b8e3a1b5a1f3c1c8d8e8d8c8c8c8d8d8
+```
+#### **[⬆ Back to Top](#level--medium)**
+---
+
+### 4. How do you resolve merge conflicts?
+
+To resolve merge conflicts:
+1. Identify the files with conflicts using `git status`.
+2. Open the conflicting files and manually resolve conflicts.
+3. Stage the resolved files using `git add <file_name>`.
+4. Commit the resolved changes using `git commit`.
+
+Example:
+
+```sh
+git add resolved_file.txt
+git commit -m "Resolve merge conflict in resolved_file.txt"
+```
+#### **[⬆ Back to Top](#level--medium)**
+---
+
+### 5. Explain the difference between `git merge` and `git rebase`.
+
+- **`git merge`**: Combines the changes from one branch into another, creating a merge commit.
+  
+  ```sh
+  git merge feature-branch
+  ```
+
+- **`git rebase`**: Moves or combines a sequence of commits to a new base commit. It creates a linear history.
+
+  ```sh
+  git rebase main
+  ```
+#### **[⬆ Back to Top](#level--medium)**
+---
+
+
+### 6. How do you stash changes in Git?
+
+To stash changes, use:
+
+```sh
+git stash
+```
+
+This command saves your local modifications away and reverts the working directory to match the HEAD commit.
+
+#### **[⬆ Back to Top](#level--medium)**
+---
+
+### 7. How do you apply stashed changes?
+
+To apply stashed changes, use:
+
+```sh
+git stash apply
+```
+
+Or to both apply and remove the stash:
+
+```sh
+git stash pop
+```
+#### **[⬆ Back to Top](#level--medium)**
+---
+
+### 8. What is the purpose of the `.gitignore` file?
+
+The `.gitignore` file specifies which files and directories Git should ignore and not track. It helps prevent committing unnecessary files like temporary files, build artifacts, and sensitive information.
+
+Example `.gitignore`:
+
+```
+*.log
+node_modules/
+.env
+```
+#### **[⬆ Back to Top](#level--medium)**
+---
+
+### 9. How do you revert a commit that has already been pushed to the remote repository?
+
+To revert a pushed commit, use:
+
+```sh
+git revert <commit_hash>
+```
+
+This creates a new commit that undoes the changes of the specified commit.
+
+#### **[⬆ Back to Top](#level--medium)**
+---
+
+### 10. How do you cherry-pick a commit?
+
+To cherry-pick a commit, use:
+
+```sh
+git cherry-pick <commit_hash>
+```
+
+This command copies the changes from the specified commit and applies them to your current branch.
+
+#### **[⬆ Back to Top](#level--medium)**
+---
+
+### 11. What is the difference between `git diff` and `git log`?
+
+- **`git diff`**: Shows the changes between commits, branches, files, etc.
+
+  ```sh
+  git diff
+  ```
+
+- **`git log`**: Shows the commit history.
+
+  ```sh
+  git log
+  ```
+
+#### **[⬆ Back to Top](#level--medium)**
+---
+
+### 12. How do you create a new branch and push it to the remote repository in one command?
+
+To create a new branch and push it to the remote repository:
+
+```sh
+git checkout -b <branch_name> && git push -u origin <branch_name>
+```
+#### **[⬆ Back to Top](#level--medium)**
+---
+
+### 13. What is `git bisect` and how is it used?
+
+`git bisect` helps you find the commit that introduced a bug by performing a binary search through your commit history.
+
+Example usage:
+
+```sh
+git bisect start
+git bisect bad
+git bisect good <commit_hash>
+```
+
+Mark each commit as good or bad until you find the problematic commit.
+
+#### **[⬆ Back to Top](#level--medium)**
+---
+
+### 14. How do you squash commits?
+
+To squash commits, use interactive rebase:
+
+```sh
+git rebase -i HEAD~n
+```
+
+Replace `pick` with `squash` (or `s`) for the commits you want to squash, then save and close the editor.
+
+#### **[⬆ Back to Top](#level--medium)**
+---
+
+### 15. How do you create a bare repository?
+
+To create a bare repository, use:
+
+```sh
+git init --bare <repository_name>.git
+```
+
+A bare repository is typically used as a central repository for collaboration.
+
+#### **[⬆ Back to Top](#level--medium)**
+---
+
+### 16. What is a detached HEAD state?
+
+A detached HEAD state occurs when your HEAD is pointing to a commit instead of a branch. This means you are not on any branch.
+
+Example:
+
+```sh
+git checkout <commit_hash>
+```
+#### **[⬆ Back to Top](#level--medium)**
+---
+
+### 17. How do you configure a remote upstream branch?
+
+To configure a remote upstream branch, use:
+
+```sh
+git branch --set-upstream-to=<remote>/<branch>
+```
+
+For example:
+
+```sh
+git branch --set-upstream-to=origin/main
+```
+#### **[⬆ Back to Top](#level--medium)**
+---
+
+### 18. How do you set up a Git hook?
+
+Create a file in the `.git/hooks` directory with the appropriate hook name (e.g., `pre-commit`, `post-commit`). Write your script in this file.
+
+Example `pre-commit` hook:
+
+```sh
+#!/bin/sh
+echo "Running pre-commit hook"
+```
+
+Make the script executable:
+
+```sh
+chmod +x .git/hooks/pre-commit
+```
+#### **[⬆ Back to Top](#level--medium)**
+---
+
+### 19. How do you force push to a remote repository?
+
+To force push, use:
+
+```sh
+git push --force
+```
+#### **[⬆ Back to Top](#level--medium)**
+---
+
+### 20. What are submodules in Git?
+
+Submodules allow you to keep a Git repository as a subdirectory of another Git repository. This is useful for managing dependencies.
+
+Adding a submodule:
+
+```sh
+git submodule add <repository_url> <path>
+```
+#### **[⬆ Back to Top](#level--medium)**
+---
+
+### 21. How do you clone a repository with submodules?
+
+To clone a repository with submodules:
+
+```sh
+git clone --recurse-submodules <repository_url>
+```
+#### **[⬆ Back to Top](#level--medium)**
+---
+
+### 22. Explain the difference between `git reset --soft`, `--mixed`, and `--hard`.
+
+- **`--soft`**: Moves HEAD to the specified commit, but leaves the staging area and working directory unchanged.
+
+  ```sh
+  git reset --soft HEAD~1
+  ```
+
+- **`--mixed`** (default): Moves HEAD to the specified commit and resets the staging area, but leaves the working directory unchanged.
+
+  ```sh
+  git reset --mixed HEAD~1
+  ```
+
+- **`--hard`**: Moves HEAD to the specified commit and resets both the staging area and working directory.
+
+  ```sh
+  git reset --hard HEAD~1
+  ```
+
+#### **[⬆ Back to Top](#level--medium)**
+---
+
+### 23. How do you find a specific commit in the history?
+
+To find a specific commit, use:
+
+```sh
+git log --grep="<search_term>"
+```
+#### **[⬆ Back to Top](#level--medium)**
+---
+
+### 24. How do you change the last commit message?
+
+To change the last commit message, use:
+
+```sh
+git commit --amend -m "New commit message"
+```
+#### **[⬆ Back to Top](#level--medium)**
+---
+
+### 25. What is the difference between an annotated and a lightweight tag?
+
+- **Annotated Tag**: Stores extra metadata such as the tagger name, email, date, and a tagging message. It's stored as a full object in the Git database.
+
+  ```sh
+  git tag -a <tag_name> -m "Tag message"
+  ```
+
+- **Lightweight Tag**: A simple pointer to a specific commit. It does not store any extra metadata.
+
+  ```sh
+  git tag <tag_name>
+  ```
+#### **[⬆ Back to Top](#level--medium)**
+---
+
+### Summary Table
+
+| Command | Description |
+|---------|-------------|
+| `git init` | Initialize a Git repository |
+| `git clone <repository_url>` | Clone a repository |
+| `git commit -m "message"` | Commit changes |
+| `git status` | Check the status of the working directory |
+| `git add <file_name>` | Stage changes |
+| `git log` | View commit history |
+| `git diff` | View changes |
+| `git branch <branch_name>` | Create a new branch |
+| `git checkout <branch_name>` | Switch branches |
+| `git merge <branch_name>` | Merge branches |
+| `git rebase <branch_name>` | Rebase branches |
+| `git stash` | Stash changes |
+| `git stash apply` | Apply stashed changes |
+| `git revert <commit_hash>` | Revert a commit |
+| `git cherry-pick <commit_hash>` | Cherry-pick a commit |
+| `git bisect` | Perform binary search to find a commit |
+| `git rebase -i HEAD~n` | Squash commits |
+| `git init --bare` | Create a bare repository |
+| `git branch --set-upstream-to=<remote>/<branch>` | Set upstream branch |
+| `git push --force` | Force push to a remote repository |
+| `git submodule add <repository_url>` | Add a submodule |
+| `git clone --recurse-submodules <repository_url>` | Clone repository with submodules |
+| `git reset --soft` | Reset with soft option |
+| `git reset --mixed` | Reset with mixed option |
+| `git reset --hard` | Reset with hard option |
+| `git log --grep="<search_term>"` | Search commit history |
+| `git commit --amend -m "New message"` | Amend last commit message |
+| `git tag -a <tag_name> -m "message"` | Create an annotated tag |
+| `git tag <tag_name>` | Create a lightweight tag |
+
+This guide should provide a comprehensive understanding of advanced Git commands and concepts.
+
+#### **[⬆ Back to Top](#level--medium)**
+---
