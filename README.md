@@ -946,3 +946,420 @@ This guide should provide a comprehensive understanding of advanced Git commands
 
 #### **[⬆ Back to Top](#level--medium)**
 ---
+
+# Hard Git Interview Questions and Answers
+### 1. What is Git rebasing and what are its advantages and disadvantages?
+
+**Git Rebasing** is the process of moving or combining a sequence of commits to a new base commit. It allows you to maintain a linear project history.
+
+#### Advantages:
+- **Clean History**: Rebasing results in a cleaner, more linear commit history.
+- **Easier Merging**: Reduces the complexity of the merge process by avoiding merge commits.
+
+#### Disadvantages:
+- **History Rewriting**: Can be dangerous if not used carefully, especially with shared branches, as it rewrites commit history.
+- **Loss of Context**: Merge commits provide a context of when branches were combined, which is lost with rebasing.
+
+**Example:**
+
+```sh
+git checkout feature-branch
+git rebase main
+```
+#### **[⬆ Back to Top](#level--hard)**
+---
+
+### 2. How do you perform an interactive rebase?
+
+Interactive rebase allows you to edit, reorder, squash, or drop commits.
+
+**Example:**
+
+```sh
+git rebase -i HEAD~3
+```
+
+This command opens an editor where you can specify actions for the last three commits.
+
+```sh
+pick 1234567 Commit message 1
+squash 89abcdef Commit message 2
+pick fedcba9 Commit message 3
+```
+#### **[⬆ Back to Top](#level--hard)**
+---
+
+### 3. How do you handle a situation where you accidentally pushed sensitive information to a public repository?
+
+1. **Remove the sensitive data from history**:
+
+```sh
+git filter-branch --force --index-filter \
+  'git rm --cached --ignore-unmatch <file_path>' \
+  --prune-empty --tag-name-filter cat -- --all
+```
+
+2. **Force-push the changes**:
+
+```sh
+git push origin --force --all
+```
+
+3. **Invalidate old references**:
+
+```sh
+git push origin --force --tags
+```
+#### **[⬆ Back to Top](#level--hard)**
+---
+
+4. **Inform collaborators**: Notify all collaborators to re-clone the repository.
+
+### 4. How do you optimize a repository for performance?
+
+- **Garbage Collection**: Run `git gc` to optimize the repository by compressing file history.
+- **Pack Files**: Use `git repack` to create more efficient pack files.
+- **Prune Unreachable Objects**: Remove unreachable objects with `git prune`.
+
+**Example:**
+
+```sh
+git gc --aggressive --prune=now
+```
+#### **[⬆ Back to Top](#level--hard)**
+---
+
+### 5. Explain the internal structure of a Git repository.
+
+A Git repository consists of several components:
+
+- **Objects**: Blobs, Trees, Commits, and Tags.
+- **Refs**: Branches and Tags.
+- **Index**: The staging area.
+- **HEAD**: A pointer to the current branch.
+
+**Example:**
+
+```sh
+.git/
+  ├── objects/
+  ├── refs/
+  ├── index
+  └── HEAD
+```
+#### **[⬆ Back to Top](#level--hard)**
+---
+
+### 6. How do you handle large binary files in Git?
+
+Use **Git LFS (Large File Storage)** to manage large binary files.
+
+**Example:**
+
+1. **Install Git LFS**:
+
+```sh
+git lfs install
+```
+
+2. **Track large files**:
+
+```sh
+git lfs track "*.bin"
+```
+
+3. **Add and commit**:
+
+```sh
+git add .gitattributes
+git add largefile.bin
+git commit -m "Add large file using LFS"
+git push
+```
+#### **[⬆ Back to Top](#level--hard)**
+---
+
+### 7. What is the purpose of the `git fsck` command?
+
+`git fsck` checks the integrity of the Git repository, identifying any corrupted objects.
+
+**Example:**
+
+```sh
+git fsck
+```
+#### **[⬆ Back to Top](#level--hard)**
+---
+
+### 8. How do you clean up a repository with a large history?
+
+Use `git filter-branch` to rewrite history and remove unwanted data.
+
+**Example:**
+
+```sh
+git filter-branch --prune-empty --tree-filter 'rm -rf unnecessary_directory' -- --all
+```
+#### **[⬆ Back to Top](#level--hard)**
+---
+
+### 9. Explain the concept of Git object model (blobs, trees, commits, etc.).
+
+- **Blobs**: Store file data.
+- **Trees**: Represent directories and contain pointers to blobs and other trees.
+- **Commits**: Hold metadata and pointers to tree objects and parent commits.
+- **Tags**: Annotated tags provide metadata for a specific commit.
+
+#### **[⬆ Back to Top](#level--hard)**
+---
+
+### 10. How do you recover from a corrupted repository?
+
+1. **Check repository**:
+
+```sh
+git fsck
+```
+
+2. **Recover lost commits**:
+
+```sh
+git reflog
+```
+
+3. **Restore from backup**: If available, restore from a backup.
+
+#### **[⬆ Back to Top](#level--hard)**
+---
+
+### 11. How do you set up a Git server?
+
+**Example using SSH:**
+
+1. **Initialize a bare repository**:
+
+```sh
+git init --bare /path/to/repo.git
+```
+
+2. **Set up SSH access**: Ensure SSH is configured on the server.
+
+3. **Push to the remote repository**:
+
+```sh
+git remote add origin user@server:/path/to/repo.git
+git push -u origin main
+```
+#### **[⬆ Back to Top](#level--hard)**
+---
+
+### 12. What is the difference between `git archive` and `git bundle`?
+
+- **`git archive`**: Creates a tar or zip archive of the repository.
+
+  ```sh
+  git archive --format=tar HEAD | gzip > repository.tar.gz
+  ```
+
+- **`git bundle`**: Creates a single file containing the repository data.
+
+  ```sh
+  git bundle create repository.bundle main
+  ```
+
+#### **[⬆ Back to Top](#level--hard)**
+---
+
+### 13. How do you manage multiple repositories in a single project?
+
+Use **submodules** or **monorepos**:
+
+**Submodules Example:**
+
+```sh
+git submodule add <repository_url> <path>
+```
+#### **[⬆ Back to Top](#level--hard)**
+---
+
+### 14. How do you track changes to a specific directory?
+
+Use `git log` with the directory path:
+
+```sh
+git log -- <directory_path>
+```
+#### **[⬆ Back to Top](#level--hard)**
+---
+
+### 15. What is the purpose of the `reflog`?
+
+`reflog` records changes to the tips of branches and other references, allowing you to recover lost commits.
+
+**Example:**
+
+```sh
+git reflog
+```
+#### **[⬆ Back to Top](#level--hard)**
+---
+
+### 16. How do you bisect a repository with many branches?
+
+1. **Start bisect**:
+
+```sh
+git bisect start
+```
+
+2. **Mark the bad commit**:
+
+```sh
+git bisect bad
+```
+
+3. **Mark a good commit**:
+
+```sh
+git bisect good <commit_hash>
+```
+#### **[⬆ Back to Top](#level--hard)**
+---
+
+4. **Continue until the problematic commit is found**.
+
+### 17. How do you configure Git to use a different merge tool?
+
+Set the merge tool in your Git configuration:
+
+```sh
+git config --global merge.tool <tool_name>
+git config --global mergetool.<tool_name>.path <path_to_tool>
+```
+#### **[⬆ Back to Top](#level--hard)**
+---
+
+### 18. How do you use `git filter-branch` to rewrite history?
+
+Rewriting history to remove a file:
+
+```sh
+git filter-branch --index-filter 'git rm --cached --ignore-unmatch <file_path>' -- --all
+```
+#### **[⬆ Back to Top](#level--hard)**
+---
+
+### 19. What are the risks of force-pushing to a shared repository?
+
+- **Overwriting Changes**: You might overwrite others' changes.
+- **History Rewriting**: Force-push rewrites history, which can lead to inconsistencies.
+
+#### **[⬆ Back to Top](#level--hard)**
+---
+
+### 20. How do you manage Git credentials securely?
+
+- **Use SSH keys** for authentication.
+- **Use credential helpers** to securely store credentials.
+
+**Example:**
+
+```sh
+git config --global credential.helper cache
+```
+#### **[⬆ Back to Top](#level--hard)**
+---
+
+### 21. Explain what a Git worktree is and how to use it.
+
+A **Git worktree** allows you to have multiple working directories attached to a single repository.
+
+**Example:**
+
+```sh
+git worktree add <path> <branch>
+```
+#### **[⬆ Back to Top](#level--hard)**
+---
+
+### 22. How do you enforce commit message guidelines?
+
+Use a **commit-msg hook**:
+
+1. **Create the hook**:
+
+```sh
+echo -e '#!/bin/sh\nexec <script_path>' > .git/hooks/commit-msg
+chmod +x .git/hooks/commit-msg
+```
+
+2. **Write the script** to enforce guidelines.
+
+#### **[⬆ Back to Top](#level--hard)**
+---
+
+### 23. How do you use `git blame` to find the author of a specific line of code?
+
+Use `git blame` with the file path:
+
+```sh
+git blame <file_path>
+```
+#### **[⬆ Back to Top](#level--hard)**
+---
+
+### 24. What is the difference between shallow cloning and a full clone?
+
+- **Shallow Cloning**: Clones the repository with limited history, reducing download size.
+
+  ```sh
+  git clone --depth=1 <repository_url>
+  ```
+
+- **Full Clone**: Clones the entire repository history.
+
+#### **[⬆ Back to Top](#level--hard)**
+---
+
+### 25. How do you handle a situation where a merge introduces a bug that needs to be fixed without reverting the merge?
+
+1. **Identify the bug** and create a new branch:
+
+```sh
+git checkout -b fix-branch
+```
+
+2. **Make necessary changes and commit**:
+
+```sh
+git commit -m "Fix bug introduced in merge"
+```
+
+3. **Merge the fix branch back**:
+
+```sh
+git checkout main
+git merge fix-branch
+```
+#### **[⬆ Back to Top](#level--hard)**
+---
+
+### Summary Table
+
+| Command | Description |
+|---------|-------------|
+| `git rebase -i` | Perform an interactive rebase |
+| `git filter-branch` | Rewrite history |
+| `git fsck` | Check repository integrity |
+| `git gc` | Optimize repository |
+| `git lfs` | Manage large files |
+| `git reflog` | Record changes to refs |
+| `git bisect` | Find a commit introducing a bug |
+| `git worktree` | Manage multiple worktrees |
+| `git blame` | Find the author of a line |
+| `git clone --depth=1` | Shallow clone repository |
+
+This guide provides an in-depth understanding of advanced Git concepts and commands with examples.
+
+#### **[⬆ Back to Top](#level--hard)**
+---
